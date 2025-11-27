@@ -352,3 +352,13 @@ if st.button("Run Analysis"):
         path = os.path.join(os.getcwd(), fname)
         an.export_to_excel(path)
         st.success(f"Exported results to {path}")
+        
+        # --- Single-click download button ---
+        with open(path, "rb") as f:
+            excel_bytes = f.read()
+        st.download_button(
+            label="Download Excel File",
+            data=excel_bytes,
+            file_name=fname,
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
